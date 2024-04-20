@@ -5,6 +5,7 @@ import java.util.stream.StreamSupport;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -20,6 +21,7 @@ import tacos.Ingredient;
 import tacos.Ingredient.Type;
 import tacos.Taco;
 import tacos.TacoOrder;
+import tacos.TacoUDT;
 import tacos.data.IngredientRepository;
 
 @Slf4j
@@ -79,8 +81,8 @@ public class DesignTacoController {
 		if (errors.hasErrors()) {
 			return "design";
 		}
-		
-		tacoOrder.addTaco(taco);
+		TacoUDT tacoUDT = new TacoUDT(taco.getName(), taco.getIngredients());
+		tacoOrder.addTaco(tacoUDT);
 		log.info("Processing taco: {}",taco);
 		return "redirect:/orders/current";
 	}

@@ -1,15 +1,15 @@
 package tacos;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Table;
+import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import org.springframework.data.cassandra.core.mapping.Table;
 
 import lombok.Data;
 
 @Data
-@Table
+@Table("ingredients")
 public class Ingredient {
 	
-	@Id
+	@PrimaryKey
 	private final String id;
 	private final String name;
 	private final Type type;
